@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 // routes/api.php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\API\AuthController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
@@ -23,6 +23,9 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->group(function(){
     Route::get('get-user',[AuthController::class,'userInfo']);
 });
+Route::resource('products', 'API\ProductController');
+
+// Route::apiResource('/product',ProductController::class)->middleware('auth:api');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
