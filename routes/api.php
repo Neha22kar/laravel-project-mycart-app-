@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 // routes/api.php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\ProductController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
@@ -23,7 +24,10 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->group(function(){
     Route::get('get-user',[AuthController::class,'userInfo']);
 });
-Route::resource('products', 'API\ProductController');
+// routes/api.php
+
+
+Route::resource('products', ProductController::class)->except(['create', 'edit']);
 
 // Route::apiResource('/product',ProductController::class)->middleware('auth:api');
 
